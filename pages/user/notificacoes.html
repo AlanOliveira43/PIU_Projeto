@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificação de Entregas/Visitas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Boxicons for Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-dark py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
+      </div>
+      <nav>
+        <ul class="nav">
+          <!-- Navigation Links Placeholder -->
+        </ul>
+      </nav>
+      <button class="btn btn-outline-primary">Log out</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container my-5">
+    <h1 class="fw-bold mb-4">Notificação de Entregas/Visitas</h1>
+
+    <!-- Communication Panel -->
+    <section class="mt-5">
+      <h2 class="fw-bold mb-4">Painel de Comunicação</h2>
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">Avisos e Atualizações</h3>
+        </div>
+        <div class="card-body">
+          <!-- Notifications Section -->
+          <ul class="list-group mb-4" id="notification-list">
+            <!-- Notifications will be dynamically added here -->
+          </ul>
+          <!-- Add New Notification -->
+          <button class="btn btn-secondary w-100" id="add-notification">Adicionar Aviso</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script>
+    const notificationList = document.getElementById('notification-list');
+    const addNotificationButton = document.getElementById('add-notification');
+
+    const notifications = [
+      {
+        title: 'Aviso: Manutenção programada na Torre Sul.',
+        date: '27/11/2023',
+        buttonText: 'Confirmar recebimento',
+        buttonClass: 'btn-outline-success'
+      },
+      {
+        title: 'Evento: Reunião de condôminos no Salão de Festas.',
+        date: '29/11/2023',
+        buttonText: 'Confirmar presença',
+        buttonClass: 'btn-outline-primary'
+      },
+      {
+        title: 'Aviso: Pintura na garagem. Não estacionar veículos.',
+        date: '30/11/2023',
+        buttonText: 'Entendido',
+        buttonClass: 'btn-outline-warning'
+      }
+    ];
+
+    function renderNotifications() {
+      notificationList.innerHTML = '';
+      notifications.forEach((notification, index) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+        const content = document.createElement('div');
+        content.innerHTML = `
+          <strong>${notification.title}</strong>
+          <small class="text-muted d-block">Data: ${notification.date}</small>
+        `;
+
+        const button = document.createElement('button');
+        button.className = `btn ${notification.buttonClass} btn-sm`;
+        button.textContent = notification.buttonText;
+        button.addEventListener('click', () => {
+          notifications.splice(index, 1); // Remove the notification
+          renderNotifications(); // Re-render the list
+        });
+
+        listItem.appendChild(content);
+        listItem.appendChild(button);
+        notificationList.appendChild(listItem);
+      });
+    }
+
+    addNotificationButton.addEventListener('click', () => {
+      const newNotification = {
+        title: 'Novo aviso adicionado.',
+        date: new Date().toLocaleDateString('pt-BR'),
+        buttonText: 'Entendido',
+        buttonClass: 'btn-outline-info'
+      };
+      notifications.push(newNotification);
+      renderNotifications();
+    });
+
+    // Initial render
+    renderNotifications();
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+            const htmlElement = document.documentElement;
+            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-bs-theme', theme);
+
+            const toggleButton = document.getElementById('toggle-theme');
+            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+</body>
+</html>

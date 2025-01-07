@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Chamado</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">  
+  <!-- Boxicons for Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bg-dark py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
+      </div>
+      
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row">
+      <!-- Left Section -->
+      <div class="col-md-6">
+        <h1 class="fw-bold mb-4">Registro de Chamado</h1>
+        <div id="chamados-abertos" class="list-group mb-4">
+          <h3 class="mb-3">Chamados Abertos</h3>
+          <!-- Chamados serão adicionados aqui -->
+        </div>
+      </div>
+
+      <!-- Right Section -->
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-4">Novo Chamado</h2>
+        <form id="chamado-form">
+          <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea id="descricao" class="form-control" rows="3" placeholder="Descreva o problema" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria</label>
+            <select id="categoria" class="form-select" required>
+              <option value="" selected disabled>Selecione uma categoria</option>
+              <option value="Elétrica">Elétrica</option>
+              <option value="Hidráulica">Hidráulica</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Registrar Chamado</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const chamadosAbertos = document.getElementById('chamados-abertos');
+    const chamadoForm = document.getElementById('chamado-form');
+    const descricaoInput = document.getElementById('descricao');
+    const categoriaInput = document.getElementById('categoria');
+
+    // Adiciona novo chamado
+    chamadoForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const descricao = descricaoInput.value.trim();
+      const categoria = categoriaInput.value;
+
+      if (!descricao || !categoria) {
+        alert('Preencha todos os campos antes de registrar o chamado.');
+        return;
+      }
+
+      const listItem = document.createElement('div');
+      listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+      listItem.innerHTML = `
+        <div>
+          <h5>${descricao}</h5>
+          <p class="text-muted">Categoria: ${categoria}</p>
+        </div>
+        <button class="btn btn-danger btn-sm">Remover</button>
+      `;
+
+      // Botão de remover
+      const removeButton = listItem.querySelector('.btn-danger');
+      removeButton.addEventListener('click', () => {
+        chamadosAbertos.removeChild(listItem);
+      });
+
+      chamadosAbertos.appendChild(listItem);
+
+      // Limpar formulário
+      chamadoForm.reset();
+    });
+    
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+            const htmlElement = document.documentElement;
+            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-bs-theme', theme);
+
+            const toggleButton = document.getElementById('toggle-theme');
+            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+
+  <footer class="bg-dark py-3">
+    <div class="container text-center">
+      <p>© 2024 Building Management. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

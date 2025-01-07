@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Votação em Assembleia</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+<header class="bg-primary text-white py-4 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Botão Log out no canto esquerdo -->
+      <div>
+        <button class="btn btn-outline-light">Log out</button>
+      </div>
+  
+      <!-- Título centralizado -->
+      <div class="text-center flex-grow-1">
+        <h1 class="fw-bold">Sistema de Votação em Assembleia</h1>
+      </div>
+  
+      <!-- Botão Alternar Tema no canto direito -->
+      <div>
+        <button class="btn btn-outline-light" id="toggle-theme">Alternar Tema</button>
+      </div>
+    </div>
+  </header>
+  
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Vote na Proposta</h2>
+                <form id="voting-form" class="p-4 border rounded shadow">
+                    <!-- Nome -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-bold">Nome</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <!-- Proposta -->
+                    <div class="mb-3">
+                        <label for="proposal" class="form-label fw-bold">Proposta</label>
+                        <select id="proposal" name="proposal" class="form-select" required>
+                            <option value="proposta1">Proposta 1</option>
+                            <option value="proposta2">Proposta 2</option>
+                            <option value="proposta3">Proposta 3</option>
+                        </select>
+                    </div>
+
+                    <!-- Botão de Enviar -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success w-100">Votar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="container mt-5">
+        <h3 class="text-center">Votos Registrados</h3>
+        <ul id="votes-list" class="list-group mt-3">
+            <!-- Votos serão adicionados dinamicamente aqui -->
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('voting-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const name = document.getElementById('name').value;
+            const proposal = document.getElementById('proposal').value;
+
+            if (!name || !proposal) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            // Adiciona o voto à lista
+            const votesList = document.getElementById('votes-list');
+            const voteItem = document.createElement('li');
+            voteItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+            voteItem.innerHTML = `
+                <div>
+                    <strong>${name}</strong> votou em <strong>${proposal}</strong>
+                </div>
+            `;
+
+            // Botão para remover o voto
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-danger btn-sm';
+            removeButton.textContent = 'Remover';
+            removeButton.addEventListener('click', function() {
+                votesList.removeChild(voteItem);
+            });
+
+            voteItem.appendChild(removeButton);
+            votesList.appendChild(voteItem);
+
+            // Limpa o formulário
+            document.getElementById('voting-form').reset();
+        });
+
+        // Alternar tema
+        document.getElementById('toggle-theme').addEventListener('click', () => {
+            const htmlElement = document.documentElement;
+            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-bs-theme', theme);
+
+            const toggleButton = document.getElementById('toggle-theme');
+            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+</body>
+</html>

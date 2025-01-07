@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conclusão de Chamado</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Boxicons for Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">  
+</head>
+<body>
+  
+
+    <!-- Main Content -->
+    <main class="container col-md-10">
+      <h1 class="mt-4">Painel de Visualização do Status</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Áreas Comuns</h2>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h5>Churrasqueira</h5>
+              <p>Status: Disponível</p>
+              <p>Última manutenção: 01/10/2023</p>
+              <p>Próxima inspeção: 01/12/2023</p>
+            </li>
+            <li class="list-group-item">
+              <h5>Salão de Festas</h5>
+              <p>Status: Em Manutenção</p>
+              <p>Última manutenção: 15/09/2023</p>
+              <p>Próxima inspeção: 15/11/2023</p>
+            </li>
+            <!-- Adicione mais áreas comuns conforme necessário -->
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h2>Cronograma de Manutenções</h2>
+          <form id="manutencao-form">
+            <div class="form-group">
+              <label for="area">Área</label>
+              <select class="form-control" id="area" required>
+                <option value="elevador">Elevador</option>
+                <option value="piscina">Piscina</option>
+                <option value="equipamentos-ginastica">Equipamentos de Ginástica</option>
+                <!-- Adicione mais áreas conforme necessário -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="data-manutencao">Data da Manutenção</label>
+              <input type="date" class="form-control" id="data-manutencao" required>
+            </div>
+            <div class="form-group">
+              <label for="local-manutencao">Local da Manutenção</label>
+              <input type="text" class="form-control" id="local-manutencao" placeholder="Digite o local da manutenção" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-3">Cadastrar Manutenção</button>
+          </form>
+          <div id="cronograma" class="mt-4">
+            <ul class="list-group" id="lista-cronograma">
+              <!-- Manutenções serão adicionadas aqui -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Adiciona um evento ao formulário de manutenção
+    document.getElementById('manutencao-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+    
+      // Obtém os valores dos campos
+      const area = document.getElementById('area').value;
+      const dataManutencao = document.getElementById('data-manutencao').value;
+      const localManutencao = document.getElementById('local-manutencao').value;
+    
+      // Valida se todos os campos foram preenchidos
+      if (!area || !dataManutencao || !localManutencao) {
+        alert('Por favor, preencha todos os campos antes de adicionar!');
+        return;
+      }
+    
+      // Cria um novo item para a lista de cronograma
+      const listaCronograma = document.getElementById('lista-cronograma');
+      const manutencaoItem = document.createElement('li');
+      manutencaoItem.className = 'list-group-item';
+      manutencaoItem.textContent = `Área: ${area}, Data: ${dataManutencao}, Local: ${localManutencao}`;
+    
+      listaCronograma.appendChild(manutencaoItem);
+    
+      // Limpa os campos do formulário após adicionar
+      document.getElementById('area').value = '';
+      document.getElementById('data-manutencao').value = '';
+      document.getElementById('local-manutencao').value = '';
+    });
+    
+    // Alternar tema
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+      const htmlElement = document.documentElement;
+      const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+      htmlElement.setAttribute('data-bs-theme', theme);
+  
+      const toggleButton = document.getElementById('toggle-theme');
+      toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+    });
+  </script>
+  
+</body>
+</html>
+  

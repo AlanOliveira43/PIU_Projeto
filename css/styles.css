@@ -1,0 +1,24 @@
+/* Tema Claro */
+body.light {
+    --bg-color: #df1515;
+    --text-color: #14ca23;
+    --card-bg: #2276ca;
+    --navbar-bg: #007bff;
+    --button-bg: #007bff;
+    --button-text: #0c0101;
+  }
+  
+  /* Tema Escuro */
+  body.dark {
+    --bg-color: #17d627;
+    --text-color: #f70707;
+    --card-bg: #333333;
+    --navbar-bg: #555555;
+    --button-bg: #444444;
+    --button-text: #0c0000;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }

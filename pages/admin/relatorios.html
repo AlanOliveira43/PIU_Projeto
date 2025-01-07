@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Financeiro do Condomínio</title>
+    <!-- Link para o CSS -->
+    <link rel="stylesheet" href="css/styles.css">  
+    <!-- Link para o Bootstrap (opcional para estilização extra) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">Painel Financeiro do Condomínio</h1>
+        
+        <!-- Despesas -->
+        <div class="section mb-4">
+            <h2 class="text-secondary">Despesas</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manutenção do Elevador</td>
+                        <td>R$ 1.200,00</td>
+                        <td>01/10/2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Receitas -->
+        <div class="section mb-4">
+            <h2 class="text-secondary">Receitas</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Aluguel do Salão de Festas</td>
+                        <td>R$ 500,00</td>
+                        <td>05/10/2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Simulação de Orçamento -->
+        <div class="section">
+            <h2 class="text-secondary">Simulação de Orçamento</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição do Projeto/Reparo:</label>
+                    <input type="text" id="descricao" name="descricao" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="valor" class="form-label">Valor Estimado:</label>
+                    <input type="number" id="valor" name="valor" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="impacto" class="form-label">Impacto Financeiro:</label>
+                    <input type="text" id="impacto" name="impacto" class="form-control" readonly>
+                </div>
+                <button type="button" onclick="simularOrcamento()" class="btn btn-primary">Simular</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function simularOrcamento() {
+            const valor = parseFloat(document.getElementById('valor').value);
+            if (!isNaN(valor)) {
+                const impacto = valor * 1.1; // 10% de impacto financeiro
+                document.getElementById('impacto').value = 'R$ ' + impacto.toFixed(2);
+            } else {
+                alert('Por favor, insira um valor válido.');
+            }
+        }
+        
+        document.getElementById('toggle-theme').addEventListener('click', () => {
+            const htmlElement = document.documentElement;
+            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-bs-theme', theme);
+
+            const toggleButton = document.getElementById('toggle-theme');
+            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
+        });
+    </script>
+</body>
+</html>
+   
