@@ -2,15 +2,27 @@
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicados para Moradores</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
-<body class="">
+<body class="py-3">
+    <!-- Header -->
+  <header class="bg-dark py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <button class="btn btn-outline-primary" id="toggle-theme">Alternar Tema</button>
+      </div>
+      <nav>
+        <ul class="nav">
+          <!-- Navigation Links Placeholder -->
+        </ul>
+      </nav>
+      <button class="btn btn-outline-primary" id="logout-btn">Log out</button>
+    </div>
+  </header>
     <div class="container mt-5">
         <div class="card-header text-center bg-primary text-white">
                 <h1 class="fw-bold">Comunicados para Moradores</h1>
@@ -21,11 +33,13 @@
                         <label for="comunicado" class="form-label">Escreva seu comunicado:</label>
                         <textarea id="comunicado" class="form-control" placeholder="Digite o comunicado aqui..." rows="3"></textarea>
                     </div>
-                    <div class="d-grid">
-                        <button type="button" onclick="adicionarComunicado()" class="btn btn-primary btn-lg">
-                            Adicionar Comunicado
-                        </button>
+                    <div class="mb-3">
+                        <label for="data-comunicado" class="form-label">Data do comunicado:</label>
+                        <input type="date" id="data-comunicado" class="form-control" required>
                     </div>
+                    <div id="comunicados" class="mt-4"></div>
+                    <button type="button" class="btn btn-outline-primary" onclick="adicionarComunicado()">Adicionar Comunicado</button>
+                    
                 </form>
                 <hr>
                 <h4 class="mt-4">Comunicados Recentes:</h4>
@@ -36,33 +50,9 @@
         </div>
     </div>
 
-    <script>
-        function adicionarComunicado() {
-            const comunicadoText = document.getElementById('comunicado').value;
-            if (comunicadoText.trim() === '') {
-                alert('Por favor, escreva um comunicado.');
-                return;
-            }
-
-            const comunicadoDiv = document.createElement('div');
-            comunicadoDiv.className = 'alert alert-secondary mb-3';
-            comunicadoDiv.textContent = comunicadoText;
-
-            const comunicadosContainer = document.getElementById('comunicados');
-            comunicadosContainer.prepend(comunicadoDiv);
-
-            document.getElementById('comunicado').value = '';
-        }
-    
-    document.getElementById('toggle-theme').addEventListener('click', () => {
-            const htmlElement = document.documentElement;
-            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-bs-theme', theme);
-
-            const toggleButton = document.getElementById('toggle-theme');
-            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
-        });
-    </script>
+    <script src="../../js/geral/toggle-theme.js" defer></script>
+    <script src="../../js/geral/logout.js" defer></script>
+   <script src="../../js/admin/comunicado.js" defer></script>
 </body>
 </html>
     

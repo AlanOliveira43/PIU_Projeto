@@ -10,7 +10,7 @@
   <!-- Boxicons for Icons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../../css/building_styles.css">
 </head>
 <body>
   <!-- Header -->
@@ -24,7 +24,7 @@
           <!-- Navigation Links Placeholder -->
         </ul>
       </nav>
-      <button class="btn btn-outline-primary">Log out</button>
+      <button class="btn btn-outline-primary" id="logout-btn">Log out</button>
     </div>
   </header>
 
@@ -51,83 +51,11 @@
     </section>
   </main>
 
+  <script src="../../js/geral/toggle-theme.js" defer></script>
+  <script src="../../js/user/notificacao.js" defer></script>
+  <script src="../../js/geral/logout.js" defer></script>
+  
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom JS -->
-  <script>
-    const notificationList = document.getElementById('notification-list');
-    const addNotificationButton = document.getElementById('add-notification');
-
-    const notifications = [
-      {
-        title: 'Aviso: Manutenção programada na Torre Sul.',
-        date: '27/11/2023',
-        buttonText: 'Confirmar recebimento',
-        buttonClass: 'btn-outline-success'
-      },
-      {
-        title: 'Evento: Reunião de condôminos no Salão de Festas.',
-        date: '29/11/2023',
-        buttonText: 'Confirmar presença',
-        buttonClass: 'btn-outline-primary'
-      },
-      {
-        title: 'Aviso: Pintura na garagem. Não estacionar veículos.',
-        date: '30/11/2023',
-        buttonText: 'Entendido',
-        buttonClass: 'btn-outline-warning'
-      }
-    ];
-
-    function renderNotifications() {
-      notificationList.innerHTML = '';
-      notifications.forEach((notification, index) => {
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-
-        const content = document.createElement('div');
-        content.innerHTML = `
-          <strong>${notification.title}</strong>
-          <small class="text-muted d-block">Data: ${notification.date}</small>
-        `;
-
-        const button = document.createElement('button');
-        button.className = `btn ${notification.buttonClass} btn-sm`;
-        button.textContent = notification.buttonText;
-        button.addEventListener('click', () => {
-          notifications.splice(index, 1); // Remove the notification
-          renderNotifications(); // Re-render the list
-        });
-
-        listItem.appendChild(content);
-        listItem.appendChild(button);
-        notificationList.appendChild(listItem);
-      });
-    }
-
-    addNotificationButton.addEventListener('click', () => {
-      const newNotification = {
-        title: 'Novo aviso adicionado.',
-        date: new Date().toLocaleDateString('pt-BR'),
-        buttonText: 'Entendido',
-        buttonClass: 'btn-outline-info'
-      };
-      notifications.push(newNotification);
-      renderNotifications();
-    });
-
-    // Initial render
-    renderNotifications();
-    document.getElementById('toggle-theme').addEventListener('click', () => {
-            const htmlElement = document.documentElement;
-            const theme = htmlElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-bs-theme', theme);
-
-            const toggleButton = document.getElementById('toggle-theme');
-            toggleButton.textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Escuro';
-        });
-    </script>
+  
 </body>
 </html>

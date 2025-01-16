@@ -1,0 +1,49 @@
+.container .card {
+    transition: transform 0.2s  !important;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .btn-custom {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  body {
+    background-color: lightgrey;
+    background-image: url('https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    
+    
+  }
+  /*
+  footer {
+    background-color: lightgrey !important;
+  }
+  
+  [data-bs-theme="dark"] body {
+    background-color: black;
+  }
+  
+
+[data-bs-theme="dark"] footer {
+    background-color: black !important;
+}
+*/
+
+
+
+  
+  

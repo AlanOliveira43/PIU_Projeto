@@ -1,24 +1,37 @@
-/* Tema Claro */
-body.light {
-    --bg-color: #df1515;
-    --text-color: #14ca23;
-    --card-bg: #2276ca;
-    --navbar-bg: #007bff;
-    --button-bg: #007bff;
-    --button-text: #0c0101;
-  }
+.container .card {
+  transition: transform 0.2s  !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.btn-custom {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+body {
   
-  /* Tema Escuro */
-  body.dark {
-    --bg-color: #17d627;
-    --text-color: #f70707;
-    --card-bg: #333333;
-    --navbar-bg: #555555;
-    --button-bg: #444444;
-    --button-text: #0c0000;
-  }
-  
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-  }
+color: lightgray;
+}
+
+footer {
+  background-color: lightgray !important;
+}
+
+[data-bs-theme="dark"] body {
+  background-color: black;
+}
+
+[data-bs-theme="dark"] footer {
+  background-color: black !important;
+}
+
