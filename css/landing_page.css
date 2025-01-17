@@ -1,0 +1,23 @@
+
+.hero {
+    background: url('https://via.placeholder.com/1920x600') no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .hero p {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  .feature-icon {
+    font-size: 2rem;
+    color: #007bff;
+  }
