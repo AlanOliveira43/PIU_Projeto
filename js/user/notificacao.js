@@ -1,6 +1,7 @@
 const notificationList = document.getElementById('notification-list');
 const addNotificationButton = document.getElementById('add-notification');
 
+// Lista inicial de notificações
 const notifications = [
   {
     title: 'Aviso: Manutenção programada na Torre Sul.',
@@ -19,11 +20,18 @@ const notifications = [
     date: '30/11/2023',
     buttonText: 'Entendido',
     buttonClass: 'btn-outline-warning'
+  },
+  {
+    title: 'Entrega: Encomenda pendente para retirada.',
+    date: '20/01/2025',
+    buttonText: 'Retirada Confirmada',
+    buttonClass: 'btn-outline-info'
   }
 ];
 
+// Função para renderizar notificações na lista
 function renderNotifications() {
-  notificationList.innerHTML = '';
+  notificationList.innerHTML = ''; // Limpa a lista atual
   notifications.forEach((notification, index) => {
     const listItem = document.createElement('li');
     listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -38,8 +46,8 @@ function renderNotifications() {
     button.className = `btn ${notification.buttonClass} btn-sm`;
     button.textContent = notification.buttonText;
     button.addEventListener('click', () => {
-      notifications.splice(index, 1); // Remove the notification
-      renderNotifications(); // Re-render the list
+      notifications.splice(index, 1); // Remove a notificação
+      renderNotifications(); // Re-renderiza a lista
     });
 
     listItem.appendChild(content);
@@ -48,9 +56,10 @@ function renderNotifications() {
   });
 }
 
-// Chama a função renderNotifications() ao carregar a página
+// Chama a função para renderizar notificações ao carregar a página
 renderNotifications();
 
+// Evento para adicionar uma nova notificação
 addNotificationButton.addEventListener('click', () => {
   const newNotification = {
     title: 'Novo aviso adicionado.',
